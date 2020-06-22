@@ -2,7 +2,7 @@
   <div class="header">
       <div class="top-header">
           <img src="../assets/logo.png" alt="">
-          <button class="header-btn"><i class="fas fa-user-lock"></i>ورود و ثبت نام</button>
+          <button class="header-btn" @click="openModal"><i class="fas fa-user-lock"></i>ورود و ثبت نام</button>
       </div>
       <div class="main-nav">
           <div class="category-head" @click="showCategoryItem">
@@ -38,14 +38,20 @@
 
 <script>
 export default {
+  props: ['backDrop'],
   data () {
     return {
-      showCategory: false
+      showCategory: false,
+      showModal: this.backDrop
     }
   },
   methods: {
     showCategoryItem () {
       this.showCategory = !this.showCategory
+    },
+    openModal () {
+      this.showModal = true
+      this.$emit('close', this.showModal)
     }
   }
 }
@@ -70,8 +76,8 @@ img {
 }
 }
 .header-btn{
-    background-color: #ec406a;
-      box-shadow: 0 4px 8px 0 #ec406b79;
+    background-color: orange;
+      box-shadow: 1px 8px 8px 0 #ffbc0494;
 
     color: #fff;
     text-align: center;
@@ -86,6 +92,7 @@ img {
     left: 10px;
     margin: 10px 40px;
     cursor: pointer;
+        border-style: none;
 }
 .fa-user-lock{
     font-size: 16px;
@@ -98,7 +105,7 @@ img {
     height: 60px;
 }
 .category-head{
-    z-index: 5;
+    z-index: 2;
     display: flex;
     width: 19%;
     height:30px ;
@@ -180,10 +187,13 @@ a{
 }
 .page-title{
     width: 100%;
-    height: 100px;
+    height: 55px;
     h1{
         color: #464749;
         margin: 20px;
     }
+}
+button{
+    outline: none;
 }
 </style>
