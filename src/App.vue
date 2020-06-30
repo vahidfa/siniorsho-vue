@@ -1,31 +1,35 @@
 <template>
   <div>
-    <Header :backDrop="backDrop" @close="closeDrop" ></Header>
-    <PostGrid></PostGrid>
+    <Header :backDrop="backDrop" @close="closeDrop" @createPost="showCreatePost" ></Header>
+    <router-view></router-view>
+    <!-- <PostGrid v-else></PostGrid> -->
     <Footer></Footer>
-    <div class="backdrop" v-if="backDrop"  @click="closeBackDrop">
+    <div class="backdrop" v-if="backDrop"  @click="closeBackDrop();closeLogin();">
     </div>
-    <UserModal v-if="backDrop" class="user-modal" @closeBtn="closeModal">
+    <UserModal v-if="backDrop" class="user-modal" @closeBtn="closeModal" @backDropReturn="reciveBackDropFromLogin">
     </UserModal>
   </div>
 </template>
 
 <script>
+import { EventBus } from './EventBus'
 import Header from './components/Header.vue'
-import PostGrid from './components/PostGrid.vue'
+// import PostGrid from './views/PostGrid.vue'
 import Footer from './components/Footer.vue'
 import UserModal from './components/UserModal.vue'
 export default {
   components: {
     Header,
-    PostGrid,
+    // PostGrid,
     Footer,
     UserModal
   },
   data () {
     return {
       backDrop: false,
-      close: ''
+      close: '',
+      closeForm: '',
+      createPost: ''
     }
   },
   methods: {
@@ -41,11 +45,27 @@ export default {
       if (this.close === true) {
         this.backDrop = false
       }
+    },
+    closeLogin () {
+      EventBus.$emit('closeForm', this.backDrop)
+    },
+    reciveBackDropFromLogin (closefrm) {
+      this.closeForm = closefrm
+      if (this.closeForm === true) {
+        this.backDrop = false
+      }
+    },
+    showCreatePost (createPost) {
+      this.createPost = createPost
     }
+  },
+  mounted () {
+    EventBus.$on('backDropReturn', data => {
+      this.backDrop = data
+    })
   }
 }
 </script>
-
 <style lang="scss">
 @font-face {
   font-family:"vazir" ;
@@ -59,6 +79,7 @@ export default {
 }
 body{
   background-color: #ebeef1;
+  width: 100%;
 }
 a{text-decoration: none;}
 li{list-style: none;}
@@ -67,13 +88,13 @@ li{list-style: none;}
   top: 0px;
   width: 40%;
   z-index: 10;
-  margin: 5% 33%;
+  margin: 3% 33%;
 }
 .backdrop{
     position: fixed;
     z-index: 4;
     top: 0px;
-    background-color: rgba(0, 0, 0, 0.308);
+    background-color: rgba(0, 0, 0, 0.288);
     width: 100%;
     height: 1100px;
 }

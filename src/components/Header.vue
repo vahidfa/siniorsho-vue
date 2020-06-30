@@ -1,7 +1,9 @@
 <template>
   <div class="header">
       <div class="top-header">
+         <router-link to="/">
           <img src="../assets/logo.png" alt="">
+      </router-link>
           <button class="header-btn" @click="openModal"><i class="fas fa-user-lock"></i>ورود و ثبت نام</button>
       </div>
       <div class="main-nav">
@@ -13,7 +15,7 @@
               <div class="nav-bar">
               <nav>
                   <ul>
-                      <li><a href="#">صفحه اصلی</a></li>
+                      <li><router-link to="/"> صفحه اصلی</router-link></li>
                       <li><a href="#">بلاگ</a></li>
                       <li><a href="#">درباره من</a></li>
                       <li><a href="#">تماس</a> </li>
@@ -29,10 +31,23 @@
                   <li><a href="#">React.js</a></li>
               </ul>
       </div>
+              <div class="panel">
+                  <button @click="showCreatePost"><i class="fas fa-user"></i>ورود به داشبورد </button>
+              </div>
           </div>
-          <div class="page-title">
+              <div class="hamber-btn">
+               <svg @click="hideHamber" height="384pt" viewBox="0 -53 384 384" width="384pt" xmlns="http://www.w3.org/2000/svg"><path d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/></svg>              </div>
+          <div class="hamber-menu" v-if="hamber">
+              <ul>
+                  <li><router-link to="">صفحه اصلی</router-link></li>
+                  <li><router-link to="">بلاگ</router-link></li>
+                  <li><router-link to="">درباره من</router-link></li>
+                  <li><router-link to="">تماس</router-link></li>
+              </ul>
+          </div>
+          <!-- <div class="page-title">
               <h1>بلاگ</h1>
-          </div>
+          </div> -->
   </div>
 </template>
 
@@ -42,7 +57,9 @@ export default {
   data () {
     return {
       showCategory: false,
-      showModal: this.backDrop
+      showModal: this.backDrop,
+      createPost: false,
+      hamber: false
     }
   },
   methods: {
@@ -52,6 +69,14 @@ export default {
     openModal () {
       this.showModal = true
       this.$emit('close', this.showModal)
+    },
+    showCreatePost () {
+      this.$emit('createPost', this.createPost)
+      this.createPost = !this.createPost
+      this.$router.push('/createPost')
+    },
+    hideHamber () {
+      this.hamber = !this.hamber
     }
   }
 }
@@ -60,8 +85,11 @@ export default {
 <style lang="scss" scoped>
 .header{
     color: white;
+    overflow: hidden;
 }
 .top-header{
+    display:flex ;
+    flex-direction: inherit;
     color: white;
     background-color: white;
     width: 100%;
@@ -107,7 +135,7 @@ img {
 .category-head{
     z-index: 2;
     display: flex;
-    width: 19%;
+    width: 26%;
     height:30px ;
     margin: 10px;
     margin-bottom: 0px;
@@ -115,8 +143,11 @@ img {
         display: flex;
         cursor: pointer;
         top: 0px;
+        height: auto;
+        width: auto;
     }
     li:first-child{
+        height: auto;
         list-style: none;
         width: 100%;
         text-align: right;
@@ -125,6 +156,7 @@ img {
         border-radius: 4px;
         margin: auto;
         font-size: 14px;
+        overflow-y: initial;
     }
 }
 .fa-bars{
@@ -195,5 +227,78 @@ a{
 }
 button{
     outline: none;
+}
+.panel{
+    button{
+    background-color: #333538;
+    color: #ddd;
+    outline: none;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0 0 0px;
+    position: absolute;
+    left: 5%;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover{
+        background-color: black;
+    }
+    }
+}
+.fa-user{
+    color: white;
+    padding-left: 10px;
+}
+.hamber-menu{
+    display: none;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: orange;
+    color: white;
+    width: 100%;
+   height:100% ;
+   margin: auto;
+    z-index: 100;
+    top: 0px;
+    right: 0px;
+    ul{
+        display: flex;
+        flex-direction: column;
+        margin:48px auto;
+    }
+    li{
+    padding: 20px;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    }
+}
+.hamber-btn{
+    display: none;
+    background-color: #fff;
+    z-index: 120;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+        svg{
+        margin: 10px;
+        fill: orange;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 900px) {
+    .main-nav{
+        display: none;
+    }
+    .top-header{
+        visibility: hidden;
+    }
+    .hamber-btn{
+        display: block;
+    }
 }
 </style>

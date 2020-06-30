@@ -89,7 +89,7 @@ export default {
         padding:5px 10px;
         border-radius: 5px;
         border: none;
-        background-color: #ec406a;
+        background-color: orange;
         color: #fff;
         font-size:18px;
          cursor: pointer;

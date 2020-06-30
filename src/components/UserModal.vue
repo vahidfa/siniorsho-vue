@@ -1,11 +1,11 @@
 <template>
   <div v-if="closeModal">
       <div class="modal-container">
-          <div class="login">
-          <a @click="component= 'Login'">ورود</a>
+          <div  class="login">
+          <p @click="component= 'Login'">ورود</p>
           </div>
-          <div class="register" @click="component = 'Register'">
-          <a>ثبت نام </a>
+          <div  class="register" @click="component = 'Register'">
+          <p>ثبت نام </p>
           </div>
            <i class="fa fa-close" style="font-size:22px;" @click="close"></i>
     </div>
@@ -25,7 +25,8 @@ export default {
   data () {
     return {
       component: 'login',
-      closeModal: true
+      closeModal: true,
+      closeFrm: null
     }
   },
   methods: {
@@ -46,42 +47,44 @@ export default {
     border-top-left-radius: 4px;
     width: 100%;
     flex-direction: row;
+    transition: 1s ease-in;
     .login{
+        // border-left: 1px solid #ccc;
         cursor: pointer;
         width: 100%;
         margin: auto;
-         a{
+        &:hover{
+          transition: .5s;
+          background-color: orange;
+          p{
+          color: white;
+          }
+        }
+        p{
         text-decoration: none;
         color:#464749 ;
         font-size: 20px;
-        margin-right: 50px;
-         &:hover{
-            color: #ec406a;
-        }
-    a:active{
-      .login{
-        border-bottom: 5px solid orange;
         width: 100%;
-      }
-        }
+        margin-right: 50px;
     }
     }
     .register{
         cursor: pointer;
         width: 100%;
         margin: auto;
-        a{
+         &:hover{
+          background-color: orange;
+          transition: .5s;
+          p{
+          color: white;
+          }
+        }
+        p{
         width: 100%;
         text-decoration: none;
         color:#464749 ;
         font-size: 20px;
         margin-right: 50px;
-        &:hover{
-            color: #ec406a;
-        }
-        a:active{
-        width: 100%;
-        }
         }
     }
 }
