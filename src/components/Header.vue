@@ -16,9 +16,9 @@
               <nav>
                   <ul>
                       <li><router-link to="/"> صفحه اصلی</router-link></li>
-                      <li><a href="#">بلاگ</a></li>
-                      <li><a href="#">درباره من</a></li>
-                      <li><a href="#">تماس</a> </li>
+                      <li><router-link to="/blog">بلاگ</router-link></li>
+                  <li><router-link to="">درباره من</router-link></li>
+                  <li><router-link to="">تماس</router-link></li>
                   </ul>
               </nav>
               </div>
@@ -39,7 +39,7 @@
                <svg @click="hideHamber" height="384pt" viewBox="0 -53 384 384" width="384pt" xmlns="http://www.w3.org/2000/svg"><path d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/></svg>              </div>
           <div class="hamber-menu" v-if="hamber">
               <ul>
-                  <li><router-link to="">صفحه اصلی</router-link></li>
+                  <li><router-link to="/">صفحه اصلی</router-link></li>
                   <li><router-link to="">بلاگ</router-link></li>
                   <li><router-link to="">درباره من</router-link></li>
                   <li><router-link to="">تماس</router-link></li>
@@ -268,6 +268,7 @@ button{
         margin:48px auto;
     }
     li{
+        list-style: none;
     padding: 20px;
     margin: auto;
     width: 100%;

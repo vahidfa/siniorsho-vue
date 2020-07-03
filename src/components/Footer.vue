@@ -38,6 +38,7 @@ export default {
     flex-wrap: wrap;
 }
 .footer-item{
+    display: flex;
     flex-wrap: wrap;
     width: 28%;
     margin: 20px 0;
@@ -66,4 +67,22 @@ a{
         transition: .3s;
     }
 }
+@media screen and (max-width: 900px) {
+    .main-footer{
+        width: inherit;
+        &:last-child{
+            flex-direction: row;
+        }
+    }
+    .footer-item{
+        width: 90%;
+        flex-direction: column;
+        margin: auto;
+        ul{
+            width: 100%;
+            margin: 5px auto;
+        }
+    }
+}
+
 </style>

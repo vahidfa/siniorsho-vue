@@ -1,9 +1,7 @@
 <template>
-  <div>
-      <div class="main-content">
-       <div class="right-content">
+  <div class="right-content">
       <div class="loader" v-if="loading"></div>
-           <div class="post-item" v-for="(item,index) in blogFilter" :key="index">
+           <div class="post-item" v-for="(item,index) in blogs" :key="index">
              <span>{{item.category}}</span>
                <div class="post-img">
                    <img :src="item.image.src" alt="">
@@ -21,25 +19,11 @@
                </div>
            </div>
            </div>
-       <div class="left-content">
-          <Search v-model="search"></Search>
-           <div class="newsletter">
-                   <img src="../assets/pic/newsletter.jpg" alt="">
-               <input type="text" placeholder="ایمیل خود را وارد کنید...">
-                   <button>عضویت در خبرنامه</button>
-           </div>
-       </div>
-      </div>
-  </div>
 </template>
 
 <script>
-import Search from '../components/Search.vue'
 import axios from 'axios'
 export default {
-  components: {
-    Search
-  },
   data () {
     return {
       blogs: [],
@@ -67,13 +51,6 @@ export default {
         console.log(error)
       })
   },
-  computed: {
-    blogFilter () {
-      return this.blogs.filter((blog) => {
-        return blog.title.match(this.search)
-      })
-    }
-  },
   filters: {
     shortContent (text, length, after) {
       return text.substring(0, length) + after
@@ -83,22 +60,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-content{
-    width: 100%;
-    height:1100;
-    background-color:#f8f9fa;
-    display: flex;
-    flex-direction: row;
-}
 .right-content{
     display: flex;
-    border-left: 1px solid #bbb;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 70%;
+    width:80%;
     height: auto;
     // background-color: darkgoldenrod;
-    margin: 20px 20px;
+   margin: auto;
     }
 .left-content{
     width: 27%;
@@ -110,6 +79,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex-wrap: wrap;
     width: 28%;
     height: auto;
     // background-color: darksalmon;
@@ -166,32 +136,6 @@ p{
     font-size: 18px;
     color: #464749;
 }
-}
-
-.newsletter{
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    img{
-        border-radius: 10px;
-    }
-    input{
-        padding: 10px;
-        width: 90%;
-        margin: auto;
-        margin: 10px 20px;
-        outline: none;
-    }
-    button{
-        justify-content: center;
-        margin: 5px auto;
-        background-color:#ec406a ;
-        box-shadow: 0 4px 8px 0 #ec406b79;
-        border: none;
-        padding: 10px 20px;
-        color: #fff;
-        border-radius: 3px;
-    }
 }
 .loader {
   color: #ffffff;
@@ -278,21 +222,12 @@ font-size: 10px;
 margin: 5px;
 }
 @media screen and (max-width: 900px) {
-    .right-content{
+    .left-content{
         overflow-x: hidden;
-        border-left: none;
-        width: 90%;
     }
    .post-item{
        width: inherit;
        margin: 10px auto;
-   }
-   .main-content{
-     flex-direction: column-reverse;
-   }
-   .left-content{
-     width: 80%;
-     margin: 10px auto;
    }
 }
 </style>
