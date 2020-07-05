@@ -2,8 +2,10 @@
   <div>
       <div class="main-content">
        <div class="right-content">
-      <div class="loader" v-if="loading"></div>
+      <!-- <div class="loader" > </div> -->
+        <Skeleton class="skeleton" v-if="loading"></Skeleton>
            <div class="post-item" v-for="(item,index) in blogFilter" :key="index">
+      <router-link :to="'/posts/' + item.id">
              <span>{{item.category}}</span>
                <div class="post-img">
                    <img :src="item.image.src" alt="">
@@ -15,10 +17,9 @@
                    <p>{{item.content |  shortContent(100,'...')}}</p>
                </div>
                <div class="read-btn">
-      <router-link :to="'/posts/' + item.id">
                    <p>بیشتر بخوانید</p>
-           </router-link>
                </div>
+           </router-link>
            </div>
            </div>
        <div class="left-content">
@@ -34,11 +35,13 @@
 </template>
 
 <script>
+import Skeleton from '../components/Skeleton.vue'
 import Search from '../components/Search.vue'
 import axios from 'axios'
 export default {
   components: {
-    Search
+    Search,
+    Skeleton
   },
   data () {
     return {
@@ -90,7 +93,13 @@ export default {
     display: flex;
     flex-direction: row;
 }
+.skeleton{
+  display: flex;
+  width: 100%;
+  height: 570px;
+}
 .right-content{
+      padding: 16px;
     display: flex;
     border-left: 1px solid #bbb;
     flex-direction: row;
@@ -113,7 +122,7 @@ export default {
     width: 28%;
     height: auto;
     // background-color: darksalmon;
-    margin: 20px 15px;
+    margin: 20px;
     cursor: pointer;
     border-radius: 4px;
     overflow: hidden;
@@ -193,81 +202,6 @@ p{
         border-radius: 3px;
     }
 }
-.loader {
-  color: #ffffff;
-  font-size: 20px;
-  margin: 100px auto;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  position: relative;
-  text-indent: -9999em;
-  -webkit-animation: load4 1.3s infinite linear;
-  animation: load4 1.3s infinite linear;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-}
-@-webkit-keyframes load4 {
-  0%,
-  100% {
-    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
-  }
-  12.5% {
-    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  25% {
-    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  37.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  50% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  62.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-  }
-  75% {
-    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-  }
-  87.5% {
-    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-  }
-}
-@keyframes load4 {
-  0%,
-  100% {
-    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
-  }
-  12.5% {
-    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  25% {
-    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  37.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  50% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  62.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-  }
-  75% {
-    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-  }
-  87.5% {
-    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-  }
-}
-.loader{
-    position: absolute;
-    top: 50%;
-    right: 30%;
-    color: orange;
-}
 span{
   position: absolute;
   padding: 1px 10px;
@@ -278,6 +212,9 @@ font-size: 10px;
 margin: 5px;
 }
 @media screen and (max-width: 900px) {
+  .newsletter{
+    display: none;
+  }
     .right-content{
         overflow-x: hidden;
         border-left: none;

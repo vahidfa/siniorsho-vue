@@ -17,8 +17,8 @@
             </div>
             <div class="footer-item">
                 <h4>اعتماد شما سرمایه ماست</h4>
-                <img src="../assets/pic/neshan.png" alt="">
-                <img src="../assets/pic/etemad.png" alt="">
+                <img src="../assets/logo.png" alt="">
+
             </div>
         </div>
     </div>
@@ -39,11 +39,14 @@ export default {
 }
 .footer-item{
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 28%;
     margin: 20px 0;
     img{
         width: 40%;
+        height: 40%;
+        margin: auto;
     }
     h4{
         color: #fff;
