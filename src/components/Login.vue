@@ -33,7 +33,8 @@ export default {
       error: null,
       submit: false,
       loading: false,
-      closeForm: null
+      closeForm: null,
+      loggedIn: false
     }
   },
   validations: {
@@ -61,6 +62,9 @@ export default {
             clearTimeout(id)
           }, 1500)
         })
+        .then(
+          this.loggedIn = true
+        )
         .catch(err => {
           this.error = err.message
           this.error = true

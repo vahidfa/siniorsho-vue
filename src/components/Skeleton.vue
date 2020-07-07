@@ -3,8 +3,15 @@
       <div v-for="i in 6" :key="i" class="container">
       <div class="image">
           </div>
-      <span class="title" v-for="i in 2" :key="i"></span>
-          <div  v-for="i in 3" :key="i" class="text">
+      <span class="title"></span>
+      <span class="title"></span>
+          <div class="text">
+      <span></span>
+      </div>
+          <div class="text">
+      <span></span>
+      </div>
+          <div class="text">
       <span></span>
       </div>
       </div>
@@ -25,10 +32,10 @@ export default {
     height: 100%;
 }
 .container{
-    width: 26%;
+    flex: 28%;
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin:20px;
 }
 .image{
     display: flex;
@@ -58,5 +65,10 @@ export default {
     height: 15px;
     background-color: rgb(231, 227, 227);
     margin: 5px 0;
+}
+@media screen and (max-width: 900px) {
+    .container{
+        flex: 50%;
+    }
 }
 </style>

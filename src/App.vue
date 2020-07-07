@@ -3,7 +3,7 @@
     <Header :backDrop="backDrop" @close="closeDrop" @createPost="showCreatePost" ></Header>
     <router-view></router-view>
     <!-- <PostGrid v-else></PostGrid> -->
-    <Footer></Footer>
+    <Footer class="footer"></Footer>
     <div class="backdrop" v-if="backDrop"  @click="closeBackDrop();closeLogin();">
     </div>
     <UserModal v-if="backDrop" class="user-modal" @closeBtn="closeModal" @backDropReturn="reciveBackDropFromLogin">

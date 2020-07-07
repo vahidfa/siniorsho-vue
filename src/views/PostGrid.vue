@@ -14,7 +14,7 @@
                    <h3>{{item.title}}</h3>
                </div>
                <div class="post-description">
-                   <p>{{item.content |  shortContent(100,'...')}}</p>
+                   <p>{{item.content |  shortContent(90,'...')}}</p>
                </div>
                <div class="read-btn">
                    <p>بیشتر بخوانید</p>
@@ -24,11 +24,6 @@
            </div>
        <div class="left-content">
           <Search v-model="search"></Search>
-           <div class="newsletter">
-                   <img src="../assets/pic/newsletter.jpg" alt="">
-               <input type="text" placeholder="ایمیل خود را وارد کنید...">
-                   <button>عضویت در خبرنامه</button>
-           </div>
        </div>
       </div>
   </div>
@@ -96,10 +91,10 @@ export default {
 .skeleton{
   display: flex;
   width: 100%;
-  height: 570px;
+  height: 590px;
 }
 .right-content{
-      padding: 16px;
+    padding: 16px;
     display: flex;
     border-left: 1px solid #bbb;
     flex-direction: row;
@@ -118,10 +113,7 @@ export default {
 .post-item{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 28%;
-    height: auto;
-    // background-color: darksalmon;
     margin: 20px;
     cursor: pointer;
     border-radius: 4px;
@@ -149,20 +141,21 @@ img{
     height: 150px;
 }
 .post-title{
-    margin: 5px 10px;
-    flex-wrap: nowrap;
+    margin: 5px 10px 15px 10px;
 }
 h3{
     color: #464749;
+    flex-wrap: nowrap;
 }
 .post-description{
     p{
+      height: 100%;
         font-size: 13px;
         color: #898989;
-        margin: 10px 5px;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
-        // overflow: hidden;
+        margin: 5px;
+        padding-bottom: 5px;
+        flex-wrap: nowrap;
+        text-align: justify;
     }
 }
 .read-btn{
@@ -170,37 +163,13 @@ h3{
 width: 100%;
 padding-top: 3px;
 background-color: #ececec;
+height: 100%;
+margin-bottom: 0px;
 p{
     text-align: center;
     font-size: 18px;
     color: #464749;
 }
-}
-
-.newsletter{
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    img{
-        border-radius: 10px;
-    }
-    input{
-        padding: 10px;
-        width: 90%;
-        margin: auto;
-        margin: 10px 20px;
-        outline: none;
-    }
-    button{
-        justify-content: center;
-        margin: 5px auto;
-        background-color:#ec406a ;
-        box-shadow: 0 4px 8px 0 #ec406b79;
-        border: none;
-        padding: 10px 20px;
-        color: #fff;
-        border-radius: 3px;
-    }
 }
 span{
   position: absolute;
@@ -212,17 +181,13 @@ font-size: 10px;
 margin: 5px;
 }
 @media screen and (max-width: 900px) {
-  .newsletter{
-    display: none;
-  }
     .right-content{
-        overflow-x: hidden;
         border-left: none;
         width: 90%;
     }
    .post-item{
-       width: inherit;
-       margin: 10px auto;
+      // //  width: inherit;
+      flex: 100%;
    }
    .main-content{
      flex-direction: column-reverse;
@@ -230,6 +195,18 @@ margin: 5px;
    .left-content{
      width: 80%;
      margin: 10px auto;
+   }
+   .skeleton{
+     height: 100%;
+   }
+}
+@media screen and (max-width: 1200px) {
+  .post-item{
+    width: 40%;
+    margin:10px auto;
+  }
+   .skeleton{
+     height: 100%;
    }
 }
 </style>

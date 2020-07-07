@@ -32,7 +32,7 @@
               </ul>
       </div>
               <div class="panel">
-                  <button @click="showCreatePost"><i class="fas fa-user"></i>ورود به داشبورد </button>
+                  <button @click="showCreatePost" v-if="isLogined"><i class="fas fa-user"></i>ورود به داشبورد </button>
               </div>
           </div>
               <div class="hamber-btn">
@@ -59,7 +59,8 @@ export default {
       showCategory: false,
       showModal: this.backDrop,
       createPost: false,
-      hamber: false
+      hamber: false,
+      isLogined: false
     }
   },
   methods: {
@@ -77,6 +78,12 @@ export default {
     },
     hideHamber () {
       this.hamber = !this.hamber
+    }
+  },
+  mounted () {
+    localStorage.getItem('user-token')
+    if (localStorage.getItem('user-token')) {
+      this.isLogined = true
     }
   }
 }
@@ -250,10 +257,11 @@ button{
     padding-left: 10px;
 }
 .hamber-menu{
+    overflow-y: hidden;
     display: none;
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     background-color: orange;
     color: white;
     width: 100%;
@@ -280,7 +288,7 @@ button{
     background-color: #fff;
     z-index: 120;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0px;
     right: 0px;
         svg{

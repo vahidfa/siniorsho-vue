@@ -1,6 +1,6 @@
 <template>
   <div class="right-content">
-      <div class="loader" v-if="loading"></div>
+      <Skeleton class="skeleton" v-if="loading"></Skeleton>
            <div class="post-item" v-for="(item,index) in blogs" :key="index">
              <span>{{item.category}}</span>
                <div class="post-img">
@@ -22,8 +22,12 @@
 </template>
 
 <script>
+import Skeleton from '../components/Skeleton.vue'
 import axios from 'axios'
 export default {
+  components: {
+    Skeleton
+  },
   data () {
     return {
       blogs: [],
@@ -60,30 +64,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-content{
+    width: 100%;
+    height:1100;
+    background-color:#f8f9fa;
+    display: flex;
+    flex-direction: row;
+}
+.skeleton{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
 .right-content{
+    padding: 16px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width:80%;
+    width: 90%;
     height: auto;
-    // background-color: darkgoldenrod;
-   margin: auto;
+    margin: auto;
+    // margin: 20px 20px;
     }
-.left-content{
-    width: 27%;
-    height: auto;
-    // background-color:darkmagenta;
-    margin: 20px 20px;
-}
 .post-item{
+  height: auto;
+  position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap;
     width: 28%;
-    height: auto;
-    // background-color: darksalmon;
-    margin: 20px 15px;
+    margin: 20px;
     cursor: pointer;
     border-radius: 4px;
     overflow: hidden;
@@ -107,110 +116,40 @@ export default {
 }
 img{
     width: 100%;
-    height: 150px;
+    height: 180px;
 }
 .post-title{
-    margin: 5px 10px;
-    flex-wrap: nowrap;
+    margin: 5px 10px 15px 10px;
 }
 h3{
     color: #464749;
+    flex-wrap: nowrap;
 }
 .post-description{
+      height: 100%;
     p{
         font-size: 13px;
         color: #898989;
-        margin: 10px 5px;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
-        // overflow: hidden;
+        margin: 0px 5px 30px 0;
+        padding-bottom: 5px;
+        flex-wrap: nowrap;
+        text-align: justify;
     }
 }
 .read-btn{
+  position: absolute;
+  bottom: 0;
+  height: 30px;
 // margin-top: 20px;
 width: 100%;
 padding-top: 3px;
 background-color: #ececec;
+margin-bottom: 0px;
 p{
     text-align: center;
     font-size: 18px;
     color: #464749;
 }
-}
-.loader {
-  color: #ffffff;
-  font-size: 20px;
-  margin: 100px auto;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  position: relative;
-  text-indent: -9999em;
-  -webkit-animation: load4 1.3s infinite linear;
-  animation: load4 1.3s infinite linear;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-}
-@-webkit-keyframes load4 {
-  0%,
-  100% {
-    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
-  }
-  12.5% {
-    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  25% {
-    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  37.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  50% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  62.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-  }
-  75% {
-    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-  }
-  87.5% {
-    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-  }
-}
-@keyframes load4 {
-  0%,
-  100% {
-    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
-  }
-  12.5% {
-    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  25% {
-    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  37.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  50% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  62.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-  }
-  75% {
-    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-  }
-  87.5% {
-    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-  }
-}
-.loader{
-    position: absolute;
-    top: 50%;
-    right: 30%;
-    color: orange;
 }
 span{
   position: absolute;
@@ -222,12 +161,28 @@ font-size: 10px;
 margin: 5px;
 }
 @media screen and (max-width: 900px) {
-    .left-content{
-        overflow-x: hidden;
+    .right-content{
+        border-left: none;
+        width: 90%;
     }
    .post-item{
-       width: inherit;
-       margin: 10px auto;
+      // //  width: inherit;
+      flex: 100%;
+   }
+   .main-content{
+     flex-direction: column-reverse;
+   }
+   .skeleton{
+     height: 100%;
+   }
+}
+@media screen and (max-width: 1200px) {
+  .post-item{
+    width: 40%;
+    margin:10px auto;
+  }
+   .skeleton{
+     height: 100%;
    }
 }
 </style>
