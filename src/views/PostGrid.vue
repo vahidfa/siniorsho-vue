@@ -91,7 +91,7 @@ export default {
 .skeleton{
   display: flex;
   width: 100%;
-  height: 590px;
+  height: 100%;
 }
 .right-content{
     padding: 16px;

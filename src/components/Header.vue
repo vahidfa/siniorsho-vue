@@ -36,15 +36,23 @@
               </div>
           </div>
               <div class="hamber-btn">
-               <svg @click="hideHamber" height="384pt" viewBox="0 -53 384 384" width="384pt" xmlns="http://www.w3.org/2000/svg"><path d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/></svg>              </div>
-          <div class="hamber-menu" v-if="hamber">
+               <svg @click="hideHamber" height="384pt" viewBox="0 -53 384 384" width="384pt" xmlns="http://www.w3.org/2000/svg"><path d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/></svg>
+                 </div>
+                 <div class="hamber-container">
+          <div class="hamber-menu" ref="hamber">
+                     <svg @click="closeHamber" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+<g><g><path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717 L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859 c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287 l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285 L284.286,256.002z"/></g>
+</g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
               <ul>
                   <li><router-link to="/">صفحه اصلی</router-link></li>
                   <li><router-link to="">بلاگ</router-link></li>
                   <li><router-link to="">درباره من</router-link></li>
                   <li><router-link to="">تماس</router-link></li>
               </ul>
+              </div>
+              <div class="hamber-backdrop" v-if="backDropShow" @click="closeHamber"></div>
           </div>
+
           <!-- <div class="page-title">
               <h1>بلاگ</h1>
           </div> -->
@@ -59,8 +67,8 @@ export default {
       showCategory: false,
       showModal: this.backDrop,
       createPost: false,
-      hamber: false,
-      isLogined: false
+      isLogined: false,
+      backDropShow: false
     }
   },
   methods: {
@@ -77,7 +85,12 @@ export default {
       this.$router.push('/createPost')
     },
     hideHamber () {
-      this.hamber = !this.hamber
+      this.$refs.hamber.style.transform = 'translateX(0px)'
+      this.backDropShow = !this.backDropShow
+    },
+    closeHamber () {
+      this.backDropShow = false
+      this.$refs.hamber.style.transform = 'translateX(1000px)'
     }
   },
   mounted () {
@@ -257,17 +270,24 @@ button{
     padding-left: 10px;
 }
 .hamber-menu{
+    svg{
+        fill: white;
+        margin: 5px;
+        height: 20px;
+        width: 20px;
+    }
     overflow-y: hidden;
-    display: none;
+    transition: .5s ease-in;
+    transform: translateX(1000px);
     display: flex;
     flex-direction: column;
     position: fixed;
-    background-color: orange;
+    background-color: rgb(56, 53, 53);
     color: white;
-    width: 100%;
+    width: 50%;
    height:100% ;
    margin: auto;
-    z-index: 100;
+    z-index: 1020;
     top: 0px;
     right: 0px;
     ul{
@@ -298,6 +318,19 @@ button{
         height: 30px;
         cursor: pointer;
     }
+}
+.hamber-container{
+    display: flex;
+    flex-direction: row;
+}
+.hamber-backdrop{
+ width: 50%;
+ height: 100%;
+ position: fixed;
+ top: 0;
+ left: 0;
+ z-index: 120;
+ background-color: rgba(0, 0, 0, 0.26);
 }
 @media screen and (max-width: 900px) {
     .main-nav{
