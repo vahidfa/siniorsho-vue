@@ -1,25 +1,26 @@
 <template>
   <div class="register">
         <form  class="container" @submit.prevent="register">
-            <label>نام کاربری</label>
-            <input ref="errorBox" type="text" spellcheck="false" v-model="user.userName">
-            <span v-if="submit && !$v.user.userName.minLength">نام کاربری معتبر نیست (باید حداقل سه کاراکتر باشد)</span>
-            <span v-if="submit && !$v.user.userName.required">نام کاربری معتبر نیست (باید حداقل سه کاراکتر باشد)</span>
+          <div class="email">
             <label>ایمیل</label>
-            <input ref="errorBox" type="text" v-model="user.email">
-            <span v-if="submit && !$v.user.email.email">ایمیل وارد شده معتبر نیست</span>
+            <input ref="errorBox" type="text" placeholder="ایمیل خود را وارد کنید ..." v-model="user.email">
+            <span v-if="submit && !$v.user.email.email" >ایمیل وارد شده معتبر نیست</span>
             <span v-if="submit && !$v.user.email.required">ایمیل وارد شده معتبر نیست</span>
+            </div>
+            <div class="password">
             <label>رمز عبور</label>
-            <input ref="errorBox" type="password" v-model="user.password">
+            <input ref="errorBox" type="password" placeholder="رمز عبور خود را وارد کنید ..." v-model="user.password">
             <span v-if="submit && !$v.user.password.minLength">رمز عبور به درستی وارد نشده</span>
             <span v-if="submit && !$v.user.password.required">رمز عبور به درستی وارد نشده</span>
             <label>تکرار رمز عبور</label>
-            <input ref="errorBox" type="password" v-model="user.confirmPassword">
+            <input ref="errorBox" type="password" v-model="user.confirmPassword" placeholder="تکرار رمز عبور ...">
             <span v-if="submit && !$v.user.confirmPassword.required">رمز عبور مطابقت ندارد</span>
             <span v-if="submit && !$v.user.confirmPassword.sameAsPassword">رمز عبور مطابقت ندارد</span>
+            </div>
         <div v-if="loading" class="loader"></div>
             <button>ثبت نام</button>
-            <span v-if="registered" style="color:green; margin-right:100px"> ثبت نام باموفقیت انجام شد</span>
+            <span  v-if="error == false" class="success">ثبت نام شما با موفقیت انجام شد</span>
+            <span v-if="error == true" class="user-error"> {{ error }}</span>
         </form>
     </div>
 </template>
@@ -31,7 +32,6 @@ export default {
   data () {
     return {
       user: {
-        userName: '',
         email: '',
         password: '',
         confirmPassword: ''
@@ -44,7 +44,6 @@ export default {
   },
   validations: {
     user: {
-      userName: { required, minLength: minLength(3) },
       email: { required, email },
       password: { required, minLength: minLength(6) },
       confirmPassword: { required, sameAsPassword: sameAs('password') }
@@ -61,7 +60,7 @@ export default {
         .then(data => {
           data.user
             .updateProfile({
-              displayName: this.user.userName
+              displayName: this.user.email
             })
           this.registered = true
           this.loading = false
@@ -83,32 +82,28 @@ export default {
     height: auto;
     color: #6c757d;
     button{
-        width: 25%;
-        margin: auto;
-        margin: 15px auto;
-        padding:5px 10px;
+       width: 50%;
+        margin: 15px auto 20px auto;
+        padding:10px 16px;
         border-radius: 5px;
         border: none;
         background-color: orange;
         color: #fff;
         font-size:18px;
          cursor: pointer;
+         outline: none;
     }
     input{
         border-radius: 4px;
-        width: 80%;
+        width: 85%;
+        height: 48px;
         outline: none;
         padding: 5px;
-        margin: 0 35px;
+        margin: 0px auto;
         border: 1px solid #ccc;
     }
     label{
-        margin: 15px;
-    }
-    span{
-        color: red;
-        margin-right: 20px;
-        transition: .5s ease-in;
+        margin: 20px 36px 5px 50px;
     }
 }
 .register{
@@ -117,8 +112,14 @@ export default {
     border-bottom-right-radius: 4px;
 }
 span{
-  font-size: 14px;
-}
+    margin: 5px auto;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 3px;
+  }
 .loader,
 .loader:before,
 .loader:after {
@@ -175,5 +176,53 @@ span{
   40% {
     box-shadow: 0 2.5em 0 0;
   }
+}
+.success{
+  color: #155724 !important;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  border-radius: 2px;
+  padding: 5px;
+  width: 100%;
+  // border: 1px solid green;
+  font-size: 18px !important;
+  margin: auto !important;
+}
+.email , .password{
+  display: flex;
+  flex-direction: column;
+  span{
+    margin: 5px 50px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 3px;
+  }
+  input{
+    margin: 10px auto;
+  }
+}
+.password{
+  margin-bottom: 0px;
+}
+.password input{
+  background: url(../assets/svg/security.svg) no-repeat 8px 10px;
+        background-size: 30px 30px;
+}
+.email input{
+  background: url(../assets/svg/mail.svg) no-repeat 8px 10px;
+        background-size: 30px 30px;
+}
+.user-error{
+  margin: 5px auto;
+    color: #721c24 !important;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    width: auto;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 3px
 }
 </style>

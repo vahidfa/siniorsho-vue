@@ -83,13 +83,12 @@ export default {
 .container{
     display: flex;
     flex-direction: column;
-    // width: 40%;
-    height: auto;
+    height: 100%;
     color: #6c757d;
     button{
-        width: 25%;
-        margin: 5px auto;
-        padding:5px 10px;
+        width: 50%;
+        margin: 0 auto 20px auto;
+        padding:10px 16px;
         border-radius: 5px;
         border: none;
         background-color: orange;
@@ -100,19 +99,19 @@ export default {
     }
     input{
         border-radius: 4px;
-        width: 80%;
+        width: 85%;
         height: 48px;
         outline: none;
         padding: 5px;
         margin: 15px auto;
         border: 1px solid #ccc;
-        background-color: rgb(238, 235, 235);
     }
     label{
-        margin: 5px  50px;
+        margin: 20px 36px 5px 50px;
     }
 }
 .login{
+    height: 100%;
     background-color: #fff;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
@@ -124,8 +123,8 @@ span{
 .loader:before,
 .loader:after {
   border-radius: 50%;
-  width: 2.5em;
-  height: 2.5em;
+  width: 1.5em;
+  height: 1.5em;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   -webkit-animation: load7 1.8s infinite ease-in-out;
@@ -196,13 +195,11 @@ span{
 .email , .password{
   display: flex;
   flex-direction: column;
-  height: auto;
   span{
     margin: 5px 50px;
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
-    width: 30%;
     padding: 5px;
     font-size: 13px;
     border-radius: 3px;
@@ -210,6 +207,9 @@ span{
   input{
     margin: 10px auto;
   }
+}
+.password{
+  margin-bottom: 0px;
 }
 .password input{
   background: url(../assets/svg/security.svg) no-repeat 8px 10px;
@@ -224,7 +224,7 @@ span{
     color: #721c24 !important;
     background-color: #f8d7da;
     border-color: #f5c6cb;
-    width: 30%;
+    width: auto;
     padding: 5px;
     font-size: 13px;
     border-radius: 3px

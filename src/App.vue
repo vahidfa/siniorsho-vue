@@ -84,8 +84,8 @@ body{
 a{text-decoration: none;}
 li{list-style: none;}
 .user-modal{
-  position: fixed;
-  top: 0px;
+  position: absolute;
+  top: 50px;
   width: 40%;
   z-index: 10;
   margin: 3% 33%;
@@ -97,5 +97,11 @@ li{list-style: none;}
     background-color: rgba(0, 0, 0, 0.288);
     width: 100%;
     height: 1100px;
+}
+@media screen and (max-width: 900px) {
+  .user-modal{
+    width: 80%;
+    margin: 5% 10%;
+  }
 }
 </style>
