@@ -97,7 +97,7 @@ export default {
   mounted () {
     localStorage.getItem('user-token')
     if (localStorage.getItem('user-token')) {
-      this.isLogined = true
+      this.isLogined = !this.isLogined
     }
   }
 }

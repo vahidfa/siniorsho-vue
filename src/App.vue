@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <Header :backDrop="backDrop" @close="closeDrop" @createPost="showCreatePost" ></Header>
     <router-view></router-view>
     <!-- <PostGrid v-else></PostGrid> -->
@@ -80,12 +80,13 @@ export default {
 body{
   background-color: #ebeef1;
   width: 100%;
+  overflow-x: hidden;
 }
 a{text-decoration: none;}
 li{list-style: none;}
 .user-modal{
   position: absolute;
-  top: 50px;
+  top: 60px;
   width: 40%;
   z-index: 10;
   margin: 3% 33%;
@@ -97,6 +98,9 @@ li{list-style: none;}
     background-color: rgba(0, 0, 0, 0.288);
     width: 100%;
     height: 1100px;
+}
+.app{
+  position: relative;
 }
 @media screen and (max-width: 900px) {
   .user-modal{

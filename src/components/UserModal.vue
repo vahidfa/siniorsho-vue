@@ -56,7 +56,6 @@ export default {
     flex-direction: row;
     transition: 1s ease-in;
     .login{
-        // border-left: 1px solid #ccc;
         cursor: pointer;
         width: 100%;
         margin: auto;
@@ -65,7 +64,7 @@ export default {
         color:#fff ;
         font-size: 20px;
         width: 100%;
-        margin-right: 40%;
+        text-align: center;
     }
     }
     .register{
@@ -77,7 +76,7 @@ export default {
         text-decoration: none;
         color:#fff ;
         font-size: 20px;
-        margin-right: 40%;
+        text-align: center;
         }
     }
 }

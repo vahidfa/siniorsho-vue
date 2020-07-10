@@ -78,6 +78,7 @@ export default {
         .catch(err => {
           if (err.message === 'The email address is already in use by another account.') {
             this.errMassage = true
+          this.registered = false
           }
           this.loading = false
         })
@@ -217,6 +218,12 @@ span{
 }
 .password{
   margin-bottom: 0px;
+  label{
+    margin: 0px 40px;
+  }
+}
+.email label {
+      margin: 10px 40px 0 40px;
 }
 .password input{
   background: url(../assets/svg/security.svg) no-repeat 8px 10px;
