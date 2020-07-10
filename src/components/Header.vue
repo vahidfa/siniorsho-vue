@@ -346,5 +346,8 @@ button{
     .hamber-btn{
         display: block;
     }
+    .header-btn{
+        margin: 5px;
+    }
 }
 </style>

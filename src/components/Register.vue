@@ -19,13 +19,14 @@
             </div>
         <div v-if="loading" class="loader"></div>
             <button>ثبت نام</button>
-            <span  v-if="error == false" class="success">ثبت نام شما با موفقیت انجام شد</span>
-            <span v-if="error == true" class="user-error"> {{ error }}</span>
+            <span  v-if="registered == true" class="success">ثبت نام شما با موفقیت انجام شد ...</span>
+            <span v-if="errMassage == true" class="user-error">شما قبلا ثبت نام کرده اید لطفا وارد شوید</span>
         </form>
     </div>
 </template>
 
 <script>
+import { EventBus } from '../EventBus'
 import firebase from 'firebase'
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 export default {
@@ -39,7 +40,9 @@ export default {
       submit: false,
       registered: false,
       error: null,
-      loading: false
+      errMassage: false,
+      loading: false,
+      closeForm: null
     }
   },
   validations: {
@@ -64,10 +67,18 @@ export default {
             })
           this.registered = true
           this.loading = false
+          this.closeForm = false
+          localStorage.setItem('user-token', 'refreshToken')
+          const id = setTimeout(() => {
+            EventBus.$emit('backDropReturn', this.closeForm)
+            clearTimeout(id)
+          }, 1500)
             .then(() => {})
         })
         .catch(err => {
-          this.error = err.message
+          if (err.message === 'The email address is already in use by another account.') {
+            this.errMassage = true
+          }
           this.loading = false
         })
     }
