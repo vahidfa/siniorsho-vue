@@ -4,7 +4,8 @@
          <router-link to="/">
           <img src="../assets/logo.png" alt="">
       </router-link>
-          <button class="header-btn" @click="openModal"><i class="fas fa-user-lock"></i>ورود و ثبت نام</button>
+          <button v-if="!isLogin" class="header-btn" @click="openModal"><i class="fas fa-user-lock"></i>ورود و ثبت نام</button>
+          <p class="logout" @click="logout" v-if="isLogin">[ خروج ازحساب ]</p>
       </div>
       <div class="main-nav">
           <div class="category-head" @click="showCategoryItem">
@@ -24,15 +25,14 @@
               </div>
       <div class="category-item" v-if="showCategory">
               <ul>
-                  <li><a href="#">Css</a></li>
-                  <li><a href="#">Html</a></li>
-                  <li><a href="#">JavaScript</a></li>
-                  <li><a href="#">Vue.js</a></li>
-                  <li><a href="#">React.js</a></li>
+                  <li>Css</li>
+                  <li>Html</li>
+                  <li>JavaScript</li>
+                  <li>Vue.js</li>
               </ul>
       </div>
               <div class="panel">
-                  <button @click="showCreatePost" v-if="isLogined"><i class="fas fa-user"></i>ورود به داشبورد </button>
+                  <button @click="showCreatePost" v-if="token"><i class="fas fa-user"></i>ورود به داشبورد </button>
               </div>
           </div>
               <div class="hamber-btn">
@@ -53,10 +53,6 @@
               </div>
               <div class="hamber-backdrop" v-if="backDropShow" @click="closeHamber"></div>
           </div>
-
-          <!-- <div class="page-title">
-              <h1>بلاگ</h1>
-          </div> -->
   </div>
 </template>
 
@@ -69,7 +65,8 @@ export default {
       showModal: this.backDrop,
       createPost: false,
       isLogined: false,
-      backDropShow: false
+      backDropShow: false,
+      token: ''
     }
   },
   methods: {
@@ -92,13 +89,22 @@ export default {
     closeHamber () {
       this.backDropShow = false
       this.$refs.hamber.style.transform = 'translateX(1000px)'
+    },
+    logout () {
+      localStorage.removeItem('user-token')
+    }
+  },
+  computed: {
+    isLogin () {
+      if (localStorage.getItem('user-token')) {
+        return localStorage.getItem('user-token')
+      }
+      return null
     }
   },
   mounted () {
-    localStorage.getItem('user-token')
-    if (localStorage.getItem('user-token')) {
-      this.isLogined = !this.isLogined
-    }
+    this.token = localStorage.getItem('user-token')
+    console.log(localStorage.getItem('user-token'))
   }
 }
 </script>
@@ -335,6 +341,13 @@ button{
  left: 0;
  z-index: 120;
  background-color: rgba(0, 0, 0, 0.007);
+}
+.logout{
+    color: black;
+    cursor: pointer;
+    position: absolute;
+    left: 10%;
+    top: 20px;
 }
 @media screen and (max-width: 900px) {
     .main-nav{

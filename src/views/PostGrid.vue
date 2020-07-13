@@ -4,7 +4,7 @@
        <div class="right-content">
       <!-- <div class="loader" > </div> -->
         <Skeleton class="skeleton" v-if="loading"></Skeleton>
-           <div class="post-item" v-for="(item,index) in blogFilter" :key="index">
+           <div class="post-item" v-for="(item,index) in blogload" :key="index">
       <router-link :to="'/posts/' + item.id">
              <span>{{item.category}}</span>
                <div class="post-img">
@@ -32,7 +32,7 @@
 <script>
 import Skeleton from '../components/Skeleton.vue'
 import Search from '../components/Search.vue'
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   components: {
     Search,
@@ -40,35 +40,38 @@ export default {
   },
   data () {
     return {
-      blogs: [],
       loading: false,
       search: ''
     }
   },
   created () {
     this.loading = true
-    axios.get('https://sinior-419e5.firebaseio.com/posts.json')
-      .then((response) => {
-        return response.data
-      })
-      .then((response) => {
-        const getBlog = []
-        for (const key in response) {
-          response[key].id = key
-          getBlog.push(response[key])
-        }
-        this.blogs = getBlog
-        this.loading = false
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    // axios.get('https://sinior-419e5.firebaseio.com/posts.json')
+    //   .then((response) => {
+    //     return response.data
+    //   })
+    //   .then((response) => {
+    //     const getBlog = []
+    //     for (const key in response) {
+    //       response[key].id = key
+    //       getBlog.push(response[key])
+    //     }
+    //     this.blogs = getBlog
+    //     this.loading = false
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
+    this.$store.dispatch('getBlogPost')
   },
   computed: {
-    blogFilter () {
-      return this.blogs.filter((blog) => {
-        return blog.title.match(this.search)
-      })
+    // blogFilter () {
+    //   return this.blogs.filter((blog) => {
+    //     return blog.title.match(this.search)
+    //   })
+    // }
+    blogload () {
+      return this.$store.state.blogs
     }
   },
   filters: {

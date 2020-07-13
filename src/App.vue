@@ -14,13 +14,11 @@
 <script>
 import { EventBus } from './EventBus'
 import Header from './components/Header.vue'
-// import PostGrid from './views/PostGrid.vue'
 import Footer from './components/Footer.vue'
 import UserModal from './components/UserModal.vue'
 export default {
   components: {
     Header,
-    // PostGrid,
     Footer,
     UserModal
   },

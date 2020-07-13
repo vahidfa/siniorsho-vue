@@ -61,10 +61,6 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.user.email, this.user.password)
         .then(data => {
-          data.user
-            .updateProfile({
-              displayName: this.user.email
-            })
           this.registered = true
           this.loading = false
           this.closeForm = false
@@ -73,12 +69,11 @@ export default {
             EventBus.$emit('backDropReturn', this.closeForm)
             clearTimeout(id)
           }, 1500)
-            .then(() => {})
         })
         .catch(err => {
           if (err.message === 'The email address is already in use by another account.') {
             this.errMassage = true
-          this.registered = false
+            this.registered = false
           }
           this.loading = false
         })
