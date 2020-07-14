@@ -4,7 +4,7 @@
        <div class="right-content">
       <!-- <div class="loader" > </div> -->
         <Skeleton class="skeleton" v-if="loading"></Skeleton>
-           <div class="post-item" v-for="(item,index) in blogload" :key="index">
+           <div class="post-item" v-for="(item,index) in blogItems" :key="index">
       <router-link :to="'/posts/' + item.id">
              <span>{{item.category}}</span>
                <div class="post-img">
@@ -23,7 +23,7 @@
            </div>
            </div>
        <div class="left-content">
-          <Search v-model="search"></Search>
+          <Search></Search>
        </div>
       </div>
   </div>
@@ -38,40 +38,18 @@ export default {
     Search,
     Skeleton
   },
-  data () {
-    return {
-      loading: false,
-      search: ''
-    }
-  },
   created () {
-    this.loading = true
-    // axios.get('https://sinior-419e5.firebaseio.com/posts.json')
-    //   .then((response) => {
-    //     return response.data
-    //   })
-    //   .then((response) => {
-    //     const getBlog = []
-    //     for (const key in response) {
-    //       response[key].id = key
-    //       getBlog.push(response[key])
-    //     }
-    //     this.blogs = getBlog
-    //     this.loading = false
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
     this.$store.dispatch('getBlogPost')
   },
   computed: {
-    // blogFilter () {
-    //   return this.blogs.filter((blog) => {
-    //     return blog.title.match(this.search)
-    //   })
-    // }
+    blogItems () {
+      return this.$store.getters.blogFilter
+    },
     blogload () {
       return this.$store.state.blogs
+    },
+    loading () {
+      return this.$store.state.loading
     }
   },
   filters: {
@@ -96,7 +74,7 @@ export default {
   height: 100%;
 }
 .right-content{
-    padding: 16px;
+    // padding: 16px;
     display: flex;
     border-left: 1px solid #bbb;
     flex-direction: row;
@@ -139,6 +117,7 @@ export default {
     }
 }
 img{
+  object-fit: cover;
     width: 100%;
     height: 150px;
 }

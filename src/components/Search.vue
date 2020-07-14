@@ -1,6 +1,6 @@
 <template>
    <div class="search-bar">
-               <input type="text" placeholder="دنبال چی هستی؟"  :value="value" @input="$emit('input', $event.target.value)">
+               <input type="text" placeholder="دنبال چی هستی؟" v-model="searchData">
                <button>
                    <i class="fas fa-search"></i>
                </button>
@@ -9,15 +9,14 @@
 
 <script>
 export default {
-  props: ['value'],
-  data () {
-    return {
-      search: ''
-    }
-  },
-  methods: {
-    searchPass () {
-      this.$emit('input', this.search)
+  computed: {
+    searchData: {
+      get () {
+        return this.$store.state.search
+      },
+      set (value) {
+        this.$store.commit('search', value)
+      }
     }
   }
 }

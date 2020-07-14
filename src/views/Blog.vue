@@ -77,14 +77,12 @@ export default {
   height: 100%;
 }
 .right-content{
-    padding: 16px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 90%;
     height: auto;
-    margin: auto;
-    // margin: 20px 20px;
+    margin: 20px 20px;
     }
 .post-item{
   height: auto;
@@ -115,6 +113,7 @@ export default {
     }
 }
 img{
+    object-fit: cover;
     width: 100%;
     height: 180px;
 }

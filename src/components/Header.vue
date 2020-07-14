@@ -25,10 +25,12 @@
               </div>
       <div class="category-item" v-if="showCategory">
               <ul>
-                  <li>Css</li>
-                  <li>Html</li>
-                  <li>JavaScript</li>
-                  <li>Vue.js</li>
+
+                  <li @click="setCategory('')">همه مطالب</li>
+                  <li @click="setCategory('css')">Css</li>
+                  <li @click="setCategory('html')">Html</li>
+                  <li @click="setCategory('javaScript')">JavaScript</li>
+                  <li @click="setCategory('vuejs')">Vuejs</li>
               </ul>
       </div>
               <div class="panel">
@@ -92,6 +94,10 @@ export default {
     },
     logout () {
       localStorage.removeItem('user-token')
+    },
+    setCategory (type) {
+      this.$store.commit('setCategory', type)
+      this.showCategory = !this.showCategory
     }
   },
   computed: {
@@ -348,6 +354,9 @@ button{
     position: absolute;
     left: 10%;
     top: 20px;
+}
+ul{
+    padding: 0px;
 }
 @media screen and (max-width: 900px) {
     .main-nav{

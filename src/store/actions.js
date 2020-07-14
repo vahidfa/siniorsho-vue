@@ -1,6 +1,7 @@
 import axios from 'axios'
 export default {
-  getBlogPost ({ commit }, payload) {
+  getBlogPost ({ commit }) {
+    commit('loadingOn', true)
     axios.get('https://sinior-419e5.firebaseio.com/posts.json')
       .then((response) => {
         return response.data
@@ -11,6 +12,7 @@ export default {
           response[key].id = key
           getBlog.push(response[key])
           commit('getBlog', getBlog)
+          commit('loadingOn', false)
         }
       })
       .catch((error) => {

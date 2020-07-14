@@ -1,3 +1,6 @@
 export default {
-  blogs: []
+  blogs: [],
+  loading: false,
+  search: '',
+  category: ''
 }

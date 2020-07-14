@@ -87,5 +87,8 @@ a{
         }
     }
 }
+ul{
+    padding: 0px;
+}
 
 </style>

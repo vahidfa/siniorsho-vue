@@ -7,7 +7,7 @@
           <div  class="register" @click="component = 'Register',registerActive = true, loginActive = false  " :class="{activeTab: registerActive}">
           <p>ثبت نام </p>
           </div>
-           <i class="fa fa-close" style="font-size:22px;" @click="close"></i>
+           <!-- <i class="fa fa-close" style="font-size:22px;" @click="close"></i> -->
     </div>
           <component :is="component" ></component>
   </div>
@@ -48,7 +48,7 @@ export default {
 .modal-container{
   border-bottom: 1px solid #bbb;
     display: flex;
-    background-color: #2e2b2b;
+    background-color: #fff7f7;
     line-height: 55px;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
@@ -61,7 +61,7 @@ export default {
         margin: auto;
        p{
         text-decoration: none;
-        color:#fff ;
+        color:#000 ;
         font-size: 20px;
         width: 100%;
         text-align: center;
@@ -74,7 +74,7 @@ export default {
         p{
         width: 100%;
         text-decoration: none;
-        color:#fff ;
+        color:#000 ;
         font-size: 20px;
         text-align: center;
         }

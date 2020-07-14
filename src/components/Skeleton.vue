@@ -35,7 +35,6 @@ export default {
     flex: 28%;
     display: flex;
     flex-direction: column;
-    margin:20px;
 }
 .image{
     display: flex;
@@ -51,24 +50,24 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 5px;
+    height: 15px;
     background-color: rgb(231, 227, 227);
     margin: 10px auto;
     border-radius: 5px;
-    &:first-child{
+    &:first-of-type{
         width: 80% !important;
     }
 }
 .title{
     border-radius: 5px;
     width: 90%;
-    height: 15px;
+    height: 20px;
     background-color: rgb(231, 227, 227);
     margin: 5px 0;
 }
 @media screen and (max-width: 900px) {
     .container{
-        flex: 50%;
+        flex: 100%;
     }
 }
 </style>
