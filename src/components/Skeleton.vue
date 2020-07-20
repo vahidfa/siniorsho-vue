@@ -32,6 +32,7 @@ export default {
     height: 100%;
 }
 .container{
+    padding: 16px;
     flex: 28%;
     display: flex;
     flex-direction: column;

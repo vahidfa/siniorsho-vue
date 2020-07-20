@@ -16,7 +16,7 @@
                 </ul>
             </div>
             <div class="footer-item">
-                <h4>اعتماد شما سرمایه ماست</h4>
+                <h4>سینیورشو</h4>
                 <img src="../assets/logo.png" alt="">
 
             </div>

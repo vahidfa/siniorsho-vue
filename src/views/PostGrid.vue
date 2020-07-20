@@ -74,20 +74,17 @@ export default {
   height: 100%;
 }
 .right-content{
-    // padding: 16px;
     display: flex;
     border-left: 1px solid #bbb;
     flex-direction: row;
     flex-wrap: wrap;
     width: 70%;
     height: auto;
-    // background-color: darkgoldenrod;
     margin: 20px 20px;
     }
 .left-content{
     width: 27%;
     height: auto;
-    // background-color:darkmagenta;
     margin: 20px 20px;
 }
 .post-item{
